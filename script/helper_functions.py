@@ -128,4 +128,3 @@ def compose_all_functions_for_data(imgs):
     c = v + crop(v)
     r = c + rotation(c)
     return r 
-
