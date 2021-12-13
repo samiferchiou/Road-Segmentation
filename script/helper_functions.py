@@ -47,17 +47,17 @@ def img_crop(im, w, h):
             list_patches.append(im_patch)
     return list_patches
 
-def load_train_dataset():
-    # Loaded a set of images
-    root_dir = "../data/training/"
-    image_dir = root_dir + "images/"
-    gt_dir = root_dir + "groundtruth/"
-    files = os.listdir(image_dir)
-    n = len(files)
-    to_tensor = T.ToTensor()
-    imgs = [to_tensor(Image.open(image_dir + files[i])) for i in range(n)]
-    gt_imgs = [to_tensor(Image.open(gt_dir + files[i])) for i in range(n)]
-    return (imgs, gt_imgs)
+#def load_train_dataset():
+#    # Loaded a set of images
+#    root_dir = "../data/training/"
+#    image_dir = root_dir + "images/"
+#    gt_dir = root_dir + "groundtruth/"
+#    files = os.listdir(image_dir)
+#    n = len(files)
+#    to_tensor = T.ToTensor()
+#    imgs = [to_tensor(Image.open(image_dir + files[i])) for i in range(n)]
+#    gt_imgs = [to_tensor(Image.open(gt_dir + files[i])).type(torch.LongTensor) for i in range(n)]
+#    return (imgs, gt_imgs)
 
 def make_img_overlay(img, predicted_img):
     w = img.shape[0]
