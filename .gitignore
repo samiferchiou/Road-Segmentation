@@ -4,6 +4,9 @@
 # csv files
 *.csv
 
+# checkpoint training PyTorch
+*.pt
+
 
 # git usefull commands
 
