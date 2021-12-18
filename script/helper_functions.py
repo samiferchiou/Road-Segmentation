@@ -54,7 +54,7 @@ def img_crop(im, w, h):
 
 def load_train_dataset():
     #root_dir = "../data/training/"
-    root_dir = "/content/drive/MyDrive/ml_road_segmentation/data/training/"
+    root_dir = "/content/drive/MyDrive/ml_epfl/ml_road_segmentation/data/training/"
     image_dir = root_dir + "images/"
     gt_dir = root_dir + "groundtruth/"
     files = os.listdir(image_dir)
