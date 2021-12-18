@@ -7,14 +7,17 @@ import torch
 import torchvision.transforms as T
 from pathlib import Path
 
+
 def load_image(infilename):
     data = mpimg.imread(infilename)
     return data
+
 
 def img_float_to_uint8(img):
     rimg = img - np.min(img)
     rimg = (rimg / np.max(rimg) * 255).round().astype(np.uint8)
     return rimg
+
 
 # Concatenate an image and its groundtruth
 def concatenate_images(img, gt_img):
@@ -33,6 +36,7 @@ def concatenate_images(img, gt_img):
         cimg = np.concatenate((img8, gt_img_3c), axis=1)
     return cimg
 
+
 def img_crop(im, w, h):
     list_patches = []
     imgwidth = im.shape[0]
@@ -47,17 +51,20 @@ def img_crop(im, w, h):
             list_patches.append(im_patch)
     return list_patches
 
-#def load_train_dataset():
-#    # Loaded a set of images
-#    root_dir = "../data/training/"
-#    image_dir = root_dir + "images/"
-#    gt_dir = root_dir + "groundtruth/"
-#    files = os.listdir(image_dir)
-#    n = len(files)
-#    to_tensor = T.ToTensor()
-#    imgs = [to_tensor(Image.open(image_dir + files[i])) for i in range(n)]
-#    gt_imgs = [to_tensor(Image.open(gt_dir + files[i])).type(torch.LongTensor) for i in range(n)]
-#    return (imgs, gt_imgs)
+
+def load_train_dataset():
+    #root_dir = "../data/training/"
+    root_dir = "/content/drive/MyDrive/ml_road_segmentation/data/training/"
+    image_dir = root_dir + "images/"
+    gt_dir = root_dir + "groundtruth/"
+    files = os.listdir(image_dir)
+    n = len(files)
+
+    to_tensor = T.ToTensor()
+    imgs = [to_tensor(Image.open(image_dir + files[i])) for i in range(n)]
+    gt_imgs = [to_tensor(Image.open(gt_dir + files[i])) for i in range(n)]
+    return (imgs, gt_imgs)
+
 
 def make_img_overlay(img, predicted_img):
     w = img.shape[0]
@@ -71,6 +78,7 @@ def make_img_overlay(img, predicted_img):
     new_img = Image.blend(background, overlay, 0.2)
     return new_img
 
+
 def compute_conv_output_size(image_size, filter_size, stride = 1, padding = 0):
     return (image_size - filter_size + 2 * padding)/stride + 1
 
@@ -81,8 +89,8 @@ def compute_conv_output_size(image_size, filter_size, stride = 1, padding = 0):
 #Constants
 DIM_IMG = 400
 DIM_IMG_CROP=DIM_IMG//2
-NB_ROT = 3
-ANGLE_ROTATION = 30
+NB_ROT = 6
+ANGLE_ROTATION = 15
 
 #Horizontal flip
 def hor_flip(imgs):
@@ -109,8 +117,20 @@ def crop(imgs):
                     for i in range(len(imgs))
                    ]
     return cropped_imgs
-
-# MAYBE TO REMOVE ?
+    
+def compose_all_functions_for_data(imgs):
+    c = imgs + crop(imgs)
+    r = c + rotation(c)
+    return r
+    
+#def compose_all_functions_for_data(imgs):
+#    h = imgs + hor_flip(imgs)
+#    v = h + vert_flip(h)
+#    c = v + crop(v)
+#    r = c + rotation(c)
+#    return r
+    
+# MAYBE TO REMOVE
 def change_color_imgs(imgs):
     return [T.Grayscale()(imgs[i]) for i in  range(n)]
 
@@ -121,10 +141,3 @@ def jitter_imgs(imgs):
     jitter = T.ColorJitter(brightness=[2,2], contrast=0, saturation=0, hue=0)
     return [jitter(imgs[i]) for i in  range(len(imgs))]
 # END OF REMOVAL
-
-def compose_all_functions_for_data(imgs):
-    h = imgs + hor_flip(imgs)
-    v = h + vert_flip(h)
-    c = v + crop(v)
-    r = c + rotation(c)
-    return r 
