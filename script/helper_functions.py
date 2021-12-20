@@ -102,10 +102,18 @@ def vert_flip(imgs):
     vflip_imgs = [T.functional.vflip(imgs[i]) for i in range(len(imgs))]
     return vflip_imgs
     
-#Rotation
+#Old Rotation
+def rotation_old(imgs):
+    rot_imgs = [T.functional.rotate(imgs[i], ANGLE_ROTATION*(idx_rot), expand=False)
+                for idx_rot in range(NB_ROT)
+                for i in range(len(imgs))
+                ]
+    return rot_imgs
+
+#Rotation with mirroring
 def rotation(imgs):
-    rot_imgs = [T.functional.rotate(imgs[i], ANGLE_ROTATION*(i+1), expand=False)
-                for _ in range(NB_ROT)
+    rot_imgs = [torch.from_numpy(sc.rotate(imgs[i], ANGLE_ROTATION*(idx_rot+1), axes =(1,2), reshape=False, mode ='mirror'))
+                for idx_rot in range(NB_ROT)
                 for i in range(len(imgs))
                ]
     return rot_imgs
