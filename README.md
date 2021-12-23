@@ -18,14 +18,14 @@ To run ou model, we used Google Colab Pro + which give us access to :
 This configuration is required to train our model (at least). However, you cqn still load our model with less ressources.
 
 ## Instructions
-First, you need to create a Google Colab Notebook to clone our repositor by running command lines in a cell.
-Clone the repository in you Google Drive using the following command via ssh:
+First, you need to create a Google Colab Notebook to clone our repository by running command lines in a cell.
+Clone the repository in you Google Drive using the following command via ssh. To avoid having to change the path, please create a folder called 'ml_epfl' at the root of your Google Drive. Then clone our repo as follows:
 ```
-!git clone git@github.com:etiennebruno/cs433_project_2.git
+!git clone git@github.com:etiennebruno/cs433_project_2.git ml_road_segmentation
 ```
-Open the u-net.ipynb notebook and run all the cells one by one.
+Open the u-net.ipynb notebook and run all the cells one by one. You will have the option to run the K-FOLD cross validation for hyper parameters, the K-FOLD for training with bagging or simply to load an existing model. If you want to load an axisting model, pleased directly connect to our [Google Drive](https://drive.google.com/drive/folders/1-R3SQ62_dRcnp_eogn1_oclSGheUOGrz?usp=sharing) and launch our notebook directly from there since we could not (size limit) upload our weights on github.
 
-To obtain the results published in our report, go back to your drive folder and download the csv_file that has been generated. You can ow upload it to AiCrowd to get the same score.
+To obtain the results published in our report, go back to your drive folder and download the csv_file that has been generated (called submission_bagging.csv). You can ow upload it to AiCrowd to get the same score.
 
 
 ## Overview
@@ -33,41 +33,9 @@ Here's a list of the relevant source files
 
 |Source file | Description|
 |---|---|
-|`implementations.py`   | Regrouping the six machine learning algorithms we hqve developped for this project as well as dependant function|
-|`run.py`               | Main script containing the solution of the problem producing our highest prediction score|
-|`proj1_helpers.py`     | Containing additional functions used in the project|
-|`projet1.ipynb`        | Notebook of the project with all the visualization and the analysis of the training data as weel as the code of the training models|
+|`unet.ipynb`           | The notebook you can run entrely to train or test a model|
+|`data_analysis.ipynb`  | Data analysis notebook after the k-fold cross validation launched to get the best hyperparameters|
+|`models.py`            | Three different unet models explained in our report (with one or filters and with a triple convolution)|
+|`dataset_loading.py`   | Class that represents our dataset|
 
-
-# Project Road Segmentation
-
-For this choice of project task, we provide a set of satellite images acquired 
-from GoogleMaps. We also provide ground-truth images where each pixel is labeled 
-as road or background. 
-
-Your task is to train a classifier to segment roads in these images, i.e. 
-assigns a label `road=1, background=0` to each pixel.
-
-Submission system environment setup:
-
-1. The dataset is available from the 
-[CrowdAI page](https://www.aicrowd.com/challenges/epfl-ml-road-segmentation).
-
-2. Obtain the python notebook `segment_aerial_images.ipynb` from this github 
-folder, to see example code on how to extract the images as well as 
-corresponding labels of each pixel.
-
-The notebook shows how to use `scikit learn` to generate features from each 
-pixel, and finally train a linear classifier to predict whether each pixel is 
-road or background. Or you can use your own code as well. Our example code here 
-also provides helper functions to visualize the images, labels and predictions. 
-In particular, the two functions `mask_to_submission.py` and 
-`submission_to_mask.py` help you to convert from the submission format to a 
-visualization, and vice versa.
-
-3. As a more advanced approach, try `tf_aerial_images.py`, which demonstrates 
-the use of a basic convolutional neural network in TensorFlow for the same 
-prediction task.
-
-Evaluation Metric:
- [F1 score](https://en.wikipedia.org/wiki/F1_score)
+You will also find a lot of checkpoint files that corresponds to various models and predictions we experimentes througout this project.
