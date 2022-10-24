@@ -21,7 +21,7 @@ This configuration is required to train our model (at least). However, you cqn s
 First, you need to create a Google Colab Notebook to clone our repository by running command lines in a cell.
 Clone the repository in you Google Drive using the following command via ssh. To avoid having to change the path, please create a folder called 'ml_epfl' at the root of your Google Drive. Then clone our repo as follows:
 ```
-!git clone git@github.com:etiennebruno/cs433_project_2.git ml_road_segmentation
+!git clone git@github.com:etiennebruno/cs433_ml_project_2.git ml_road_segmentation
 ```
 Open the u-net.ipynb notebook and run all the cells one by one. You will have the option to run the K-FOLD cross validation for hyper parameters, the K-FOLD for training with bagging or simply to load an existing model. If you want to load an axisting model, pleased directly connect to our [Google Drive](https://drive.google.com/drive/folders/1-R3SQ62_dRcnp_eogn1_oclSGheUOGrz?usp=sharing) and launch our notebook directly from there since we could not (size limit) upload our weights on github.
 
