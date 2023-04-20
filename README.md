@@ -1,6 +1,6 @@
 # Machine Learning Project 2 - Road Segmentation - 2021-2022
 
-The purpose of this project is to implement machine learning algorithms for binary classification of pixels on satelitie images between road and not road. The resulting predictions are submitted to [AIcrowd](https://www.aicrowd.com/challenges/epfl-ml-road-segmentation/).
+The purpose of this project is to implement machine learning algorithms for binary classification of pixels on satelite images between road and not road. The resulting predictions are submitted to [AIcrowd](https://www.aicrowd.com/challenges/epfl-ml-road-segmentation/).
 
 ## Team Members
 Sami FERCHIOU : sami.ferchiou@epfl.ch <br/>
